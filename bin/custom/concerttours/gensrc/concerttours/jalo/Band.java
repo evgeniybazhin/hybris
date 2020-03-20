@@ -1,12 +1,14 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 19, 2020, 4:20:05 PM                    ---
+ * --- Generated at Mar 20, 2020, 9:45:13 AM                    ---
  * ----------------------------------------------------------------
  */
 package concerttours.jalo;
 
 import concerttours.constants.ConcerttoursConstants;
+import concerttours.jalo.Album;
+import concerttours.jalo.Song;
 import de.hybris.platform.constants.CoreConstants;
 import de.hybris.platform.directpersistence.annotation.SLDSafe;
 import de.hybris.platform.jalo.GenericItem;
@@ -51,6 +53,10 @@ public class Band extends GenericItem
 	protected static String BAND2MUSICTYPE_TGT_ORDERED = "relation.Band2MusicType.target.ordered";
 	/** Relation disable markmodifed parameter constants for Band2MusicType from ((concerttours))*/
 	protected static String BAND2MUSICTYPE_MARKMODIFIED = "relation.Band2MusicType.markmodified";
+	/** Qualifier of the <code>Band.songs</code> attribute **/
+	public static final String SONGS = "songs";
+	/** Qualifier of the <code>Band.album</code> attribute **/
+	public static final String ALBUM = "album";
 	/**
 	* {@link OneToManyHandler} for handling 1:n TOURS's relation attributes from 'many' side.
 	**/
@@ -63,6 +69,30 @@ public class Band extends GenericItem
 	true,
 	CollectionType.SET
 	).withRelationQualifier("tours");
+	/**
+	* {@link OneToManyHandler} for handling 1:n SONGS's relation attributes from 'many' side.
+	**/
+	protected static final OneToManyHandler<Song> SONGSHANDLER = new OneToManyHandler<Song>(
+	ConcerttoursConstants.TC.SONG,
+	false,
+	"band",
+	null,
+	false,
+	true,
+	CollectionType.SET
+	).withRelationQualifier("songs");
+	/**
+	* {@link OneToManyHandler} for handling 1:n ALBUM's relation attributes from 'many' side.
+	**/
+	protected static final OneToManyHandler<Album> ALBUMHANDLER = new OneToManyHandler<Album>(
+	ConcerttoursConstants.TC.ALBUM,
+	false,
+	"bands",
+	null,
+	false,
+	true,
+	CollectionType.SET
+	).withRelationQualifier("album");
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -77,6 +107,78 @@ public class Band extends GenericItem
 	protected Map<String, AttributeMode> getDefaultAttributeModes()
 	{
 		return DEFAULT_INITIAL_ATTRIBUTES;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Band.album</code> attribute.
+	 * @return the album
+	 */
+	public Set<Album> getAlbum(final SessionContext ctx)
+	{
+		return (Set<Album>)ALBUMHANDLER.getValues( ctx, this );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Band.album</code> attribute.
+	 * @return the album
+	 */
+	public Set<Album> getAlbum()
+	{
+		return getAlbum( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Band.album</code> attribute. 
+	 * @param value the album
+	 */
+	public void setAlbum(final SessionContext ctx, final Set<Album> value)
+	{
+		ALBUMHANDLER.setValues( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Band.album</code> attribute. 
+	 * @param value the album
+	 */
+	public void setAlbum(final Set<Album> value)
+	{
+		setAlbum( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to album. 
+	 * @param value the item to add to album
+	 */
+	public void addToAlbum(final SessionContext ctx, final Album value)
+	{
+		ALBUMHANDLER.addValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to album. 
+	 * @param value the item to add to album
+	 */
+	public void addToAlbum(final Album value)
+	{
+		addToAlbum( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from album. 
+	 * @param value the item to remove from album
+	 */
+	public void removeFromAlbum(final SessionContext ctx, final Album value)
+	{
+		ALBUMHANDLER.removeValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from album. 
+	 * @param value the item to remove from album
+	 */
+	public void removeFromAlbum(final Album value)
+	{
+		removeFromAlbum( getSession().getSessionContext(), value );
 	}
 	
 	/**
@@ -269,6 +371,78 @@ public class Band extends GenericItem
 	public void setName(final String value)
 	{
 		setName( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Band.songs</code> attribute.
+	 * @return the songs
+	 */
+	public Set<Song> getSongs(final SessionContext ctx)
+	{
+		return (Set<Song>)SONGSHANDLER.getValues( ctx, this );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Band.songs</code> attribute.
+	 * @return the songs
+	 */
+	public Set<Song> getSongs()
+	{
+		return getSongs( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Band.songs</code> attribute. 
+	 * @param value the songs
+	 */
+	public void setSongs(final SessionContext ctx, final Set<Song> value)
+	{
+		SONGSHANDLER.setValues( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Band.songs</code> attribute. 
+	 * @param value the songs
+	 */
+	public void setSongs(final Set<Song> value)
+	{
+		setSongs( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to songs. 
+	 * @param value the item to add to songs
+	 */
+	public void addToSongs(final SessionContext ctx, final Song value)
+	{
+		SONGSHANDLER.addValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to songs. 
+	 * @param value the item to add to songs
+	 */
+	public void addToSongs(final Song value)
+	{
+		addToSongs( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from songs. 
+	 * @param value the item to remove from songs
+	 */
+	public void removeFromSongs(final SessionContext ctx, final Song value)
+	{
+		SONGSHANDLER.removeValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from songs. 
+	 * @param value the item to remove from songs
+	 */
+	public void removeFromSongs(final Song value)
+	{
+		removeFromSongs( getSession().getSessionContext(), value );
 	}
 	
 	/**

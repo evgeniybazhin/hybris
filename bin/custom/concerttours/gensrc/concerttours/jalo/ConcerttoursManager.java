@@ -1,14 +1,16 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 19, 2020, 4:20:05 PM                    ---
+ * --- Generated at Mar 20, 2020, 9:45:13 AM                    ---
  * ----------------------------------------------------------------
  */
 package concerttours.jalo;
 
 import concerttours.constants.ConcerttoursConstants;
+import concerttours.jalo.Album;
 import concerttours.jalo.Band;
 import concerttours.jalo.Concert;
+import concerttours.jalo.Song;
 import de.hybris.platform.directpersistence.annotation.SLDSafe;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
@@ -52,6 +54,9 @@ public class ConcerttoursManager extends Extension
 		tmp.put("hashtag", AttributeMode.INITIAL);
 		tmp.put("band", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.product.Product", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
+		tmp.put("album", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.enumeration.EnumerationValue", Collections.unmodifiableMap(tmp));
 		DEFAULT_INITIAL_ATTRIBUTES = ttmp;
 	}
 	@Override
@@ -64,6 +69,42 @@ public class ConcerttoursManager extends Extension
 			ret.putAll(attr);
 		}
 		return ret;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>MusicType.album</code> attribute.
+	 * @return the album
+	 */
+	public Album getAlbum(final SessionContext ctx, final EnumerationValue item)
+	{
+		return (Album)item.getProperty( ctx, ConcerttoursConstants.Attributes.MusicType.ALBUM);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>MusicType.album</code> attribute.
+	 * @return the album
+	 */
+	public Album getAlbum(final EnumerationValue item)
+	{
+		return getAlbum( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>MusicType.album</code> attribute. 
+	 * @param value the album
+	 */
+	public void setAlbum(final SessionContext ctx, final EnumerationValue item, final Album value)
+	{
+		item.setProperty(ctx, ConcerttoursConstants.Attributes.MusicType.ALBUM,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>MusicType.album</code> attribute. 
+	 * @param value the album
+	 */
+	public void setAlbum(final EnumerationValue item, final Album value)
+	{
+		setAlbum( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -226,6 +267,32 @@ public class ConcerttoursManager extends Extension
 		removeFromBands( getSession().getSessionContext(), item, value );
 	}
 	
+	public Album createAlbum(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType("Album");
+			return (Album)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating Album : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public Album createAlbum(final Map attributeValues)
+	{
+		return createAlbum( getSession().getSessionContext(), attributeValues );
+	}
+	
 	public Band createBand(final SessionContext ctx, final Map attributeValues)
 	{
 		try
@@ -276,6 +343,32 @@ public class ConcerttoursManager extends Extension
 	public Concert createConcert(final Map attributeValues)
 	{
 		return createConcert( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public Song createSong(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType("Song");
+			return (Song)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating Song : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public Song createSong(final Map attributeValues)
+	{
+		return createSong( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public static final ConcerttoursManager getInstance()
