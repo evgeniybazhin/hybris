@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 20, 2020, 2:50:02 PM                    ---
+ * --- Generated at Mar 23, 2020, 11:59:57 AM                   ---
  * ----------------------------------------------------------------
  */
 package concerttours.jalo;
@@ -18,12 +18,15 @@ import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.type.CollectionType;
 import de.hybris.platform.jalo.type.ComposedType;
+import de.hybris.platform.jalo.type.TypeManager;
 import de.hybris.platform.util.BidirectionalOneToManyHandler;
 import de.hybris.platform.util.OneToManyHandler;
+import de.hybris.platform.util.Utilities;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,6 +45,11 @@ public class Album extends GenericItem
 	public static final String BANDS = "bands";
 	/** Qualifier of the <code>Album.types</code> attribute **/
 	public static final String TYPES = "types";
+	/** Relation ordering override parameter constants for Album2MusicType from ((concerttours))*/
+	protected static String ALBUM2MUSICTYPE_SRC_ORDERED = "relation.Album2MusicType.source.ordered";
+	protected static String ALBUM2MUSICTYPE_TGT_ORDERED = "relation.Album2MusicType.target.ordered";
+	/** Relation disable markmodifed parameter constants for Album2MusicType from ((concerttours))*/
+	protected static String ALBUM2MUSICTYPE_MARKMODIFIED = "relation.Album2MusicType.markmodified";
 	/** Qualifier of the <code>Album.songs</code> attribute **/
 	public static final String SONGS = "songs";
 	/**
@@ -56,18 +64,6 @@ public class Album extends GenericItem
 	true,
 	CollectionType.SET
 	);
-	/**
-	* {@link OneToManyHandler} for handling 1:n TYPES's relation attributes from 'many' side.
-	**/
-	protected static final OneToManyHandler<EnumerationValue> TYPESHANDLER = new OneToManyHandler<EnumerationValue>(
-	ConcerttoursConstants.TC.MUSICTYPE,
-	false,
-	"album",
-	null,
-	false,
-	true,
-	CollectionType.COLLECTION
-	).withRelationQualifier("types");
 	/**
 	* {@link OneToManyHandler} for handling 1:n SONGS's relation attributes from 'many' side.
 	**/
@@ -136,6 +132,17 @@ public class Album extends GenericItem
 	{
 		BANDSHANDLER.newInstance(ctx, allAttributes);
 		return super.createItem( ctx, type, allAttributes );
+	}
+	
+	@Override
+	public boolean isMarkModifiedDisabled(final Item referencedItem)
+	{
+		ComposedType relationSecondEnd0 = TypeManager.getInstance().getComposedType("MusicType");
+		if(relationSecondEnd0.isAssignableFrom(referencedItem.getComposedType()))
+		{
+			return Utilities.getMarkModifiedOverride(ALBUM2MUSICTYPE_MARKMODIFIED);
+		}
+		return true;
 	}
 	
 	/**
@@ -288,7 +295,16 @@ public class Album extends GenericItem
 	 */
 	public Collection<EnumerationValue> getTypes(final SessionContext ctx)
 	{
-		return TYPESHANDLER.getValues( ctx, this );
+		final List<EnumerationValue> items = getLinkedItems( 
+			ctx,
+			true,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			"MusicType",
+			null,
+			false,
+			false
+		);
+		return items;
 	}
 	
 	/**
@@ -300,13 +316,38 @@ public class Album extends GenericItem
 		return getTypes( getSession().getSessionContext() );
 	}
 	
+	public long getTypesCount(final SessionContext ctx)
+	{
+		return getLinkedItemsCount(
+			ctx,
+			true,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			"MusicType",
+			null
+		);
+	}
+	
+	public long getTypesCount()
+	{
+		return getTypesCount( getSession().getSessionContext() );
+	}
+	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Album.types</code> attribute. 
 	 * @param value the types
 	 */
 	public void setTypes(final SessionContext ctx, final Collection<EnumerationValue> value)
 	{
-		TYPESHANDLER.setValues( ctx, this, value );
+		setLinkedItems( 
+			ctx,
+			true,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			null,
+			value,
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ALBUM2MUSICTYPE_MARKMODIFIED)
+		);
 	}
 	
 	/**
@@ -324,7 +365,16 @@ public class Album extends GenericItem
 	 */
 	public void addToTypes(final SessionContext ctx, final EnumerationValue value)
 	{
-		TYPESHANDLER.addValue( ctx, this, value );
+		addLinkedItems( 
+			ctx,
+			true,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ALBUM2MUSICTYPE_MARKMODIFIED)
+		);
 	}
 	
 	/**
@@ -342,7 +392,16 @@ public class Album extends GenericItem
 	 */
 	public void removeFromTypes(final SessionContext ctx, final EnumerationValue value)
 	{
-		TYPESHANDLER.removeValue( ctx, this, value );
+		removeLinkedItems( 
+			ctx,
+			true,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ALBUM2MUSICTYPE_MARKMODIFIED)
+		);
 	}
 	
 	/**

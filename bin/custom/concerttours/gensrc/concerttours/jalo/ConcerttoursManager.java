@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 20, 2020, 2:50:02 PM                    ---
+ * --- Generated at Mar 23, 2020, 11:59:57 AM                   ---
  * ----------------------------------------------------------------
  */
 package concerttours.jalo;
@@ -10,6 +10,7 @@ import concerttours.constants.ConcerttoursConstants;
 import concerttours.jalo.Album;
 import concerttours.jalo.Band;
 import concerttours.jalo.Concert;
+import concerttours.jalo.News;
 import concerttours.jalo.Song;
 import de.hybris.platform.directpersistence.annotation.SLDSafe;
 import de.hybris.platform.jalo.GenericItem;
@@ -46,6 +47,11 @@ public class ConcerttoursManager extends Extension
 	protected static String BAND2MUSICTYPE_TGT_ORDERED = "relation.Band2MusicType.target.ordered";
 	/** Relation disable markmodifed parameter constants for Band2MusicType from ((concerttours))*/
 	protected static String BAND2MUSICTYPE_MARKMODIFIED = "relation.Band2MusicType.markmodified";
+	/** Relation ordering override parameter constants for Album2MusicType from ((concerttours))*/
+	protected static String ALBUM2MUSICTYPE_SRC_ORDERED = "relation.Album2MusicType.source.ordered";
+	protected static String ALBUM2MUSICTYPE_TGT_ORDERED = "relation.Album2MusicType.target.ordered";
+	/** Relation disable markmodifed parameter constants for Album2MusicType from ((concerttours))*/
+	protected static String ALBUM2MUSICTYPE_MARKMODIFIED = "relation.Album2MusicType.markmodified";
 	protected static final Map<String, Map<String, AttributeMode>> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -54,9 +60,6 @@ public class ConcerttoursManager extends Extension
 		tmp.put("hashtag", AttributeMode.INITIAL);
 		tmp.put("band", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.product.Product", Collections.unmodifiableMap(tmp));
-		tmp = new HashMap<String, AttributeMode>();
-		tmp.put("album", AttributeMode.INITIAL);
-		ttmp.put("de.hybris.platform.jalo.enumeration.EnumerationValue", Collections.unmodifiableMap(tmp));
 		DEFAULT_INITIAL_ATTRIBUTES = ttmp;
 	}
 	@Override
@@ -75,36 +78,124 @@ public class ConcerttoursManager extends Extension
 	 * <i>Generated method</i> - Getter of the <code>MusicType.album</code> attribute.
 	 * @return the album
 	 */
-	public Album getAlbum(final SessionContext ctx, final EnumerationValue item)
+	public Set<Album> getAlbum(final SessionContext ctx, final EnumerationValue item)
 	{
-		return (Album)item.getProperty( ctx, ConcerttoursConstants.Attributes.MusicType.ALBUM);
+		final List<Album> items = item.getLinkedItems( 
+			ctx,
+			false,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			"Album",
+			null,
+			false,
+			false
+		);
+		return new LinkedHashSet<Album>(items);
 	}
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>MusicType.album</code> attribute.
 	 * @return the album
 	 */
-	public Album getAlbum(final EnumerationValue item)
+	public Set<Album> getAlbum(final EnumerationValue item)
 	{
 		return getAlbum( getSession().getSessionContext(), item );
 	}
 	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>MusicType.album</code> attribute. 
-	 * @param value the album
-	 */
-	public void setAlbum(final SessionContext ctx, final EnumerationValue item, final Album value)
+	public long getAlbumCount(final SessionContext ctx, final EnumerationValue item)
 	{
-		item.setProperty(ctx, ConcerttoursConstants.Attributes.MusicType.ALBUM,value);
+		return item.getLinkedItemsCount(
+			ctx,
+			false,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			"Album",
+			null
+		);
+	}
+	
+	public long getAlbumCount(final EnumerationValue item)
+	{
+		return getAlbumCount( getSession().getSessionContext(), item );
 	}
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>MusicType.album</code> attribute. 
 	 * @param value the album
 	 */
-	public void setAlbum(final EnumerationValue item, final Album value)
+	public void setAlbum(final SessionContext ctx, final EnumerationValue item, final Set<Album> value)
+	{
+		item.setLinkedItems( 
+			ctx,
+			false,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			null,
+			value,
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ALBUM2MUSICTYPE_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>MusicType.album</code> attribute. 
+	 * @param value the album
+	 */
+	public void setAlbum(final EnumerationValue item, final Set<Album> value)
 	{
 		setAlbum( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to album. 
+	 * @param value the item to add to album
+	 */
+	public void addToAlbum(final SessionContext ctx, final EnumerationValue item, final Album value)
+	{
+		item.addLinkedItems( 
+			ctx,
+			false,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ALBUM2MUSICTYPE_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to album. 
+	 * @param value the item to add to album
+	 */
+	public void addToAlbum(final EnumerationValue item, final Album value)
+	{
+		addToAlbum( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from album. 
+	 * @param value the item to remove from album
+	 */
+	public void removeFromAlbum(final SessionContext ctx, final EnumerationValue item, final Album value)
+	{
+		item.removeLinkedItems( 
+			ctx,
+			false,
+			ConcerttoursConstants.Relations.ALBUM2MUSICTYPE,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ALBUM2MUSICTYPE_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from album. 
+	 * @param value the item to remove from album
+	 */
+	public void removeFromAlbum(final EnumerationValue item, final Album value)
+	{
+		removeFromAlbum( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -343,6 +434,32 @@ public class ConcerttoursManager extends Extension
 	public Concert createConcert(final Map attributeValues)
 	{
 		return createConcert( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public News createNews(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType("News");
+			return (News)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating News : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public News createNews(final Map attributeValues)
+	{
+		return createNews( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public Song createSong(final SessionContext ctx, final Map attributeValues)

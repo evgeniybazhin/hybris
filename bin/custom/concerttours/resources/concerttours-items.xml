@@ -40,7 +40,7 @@
       </relation>
 
       <relation code="Song2Band" autocreate="true" generate="false" localized="false">
-          <sourceElement qualifier="songs" type="Song" collectiontype="set" cardinality="many" ordered="false">
+          <sourceElement qualifier="songs" type="Song" collectiontype="set" cardinality="many">
               <modifiers read="true" write="true" search="true" optional="true"/>
           </sourceElement>
           <targetElement qualifier="band" type="Band" cardinality="one">
@@ -56,7 +56,8 @@
           </targetElement>
       </relation>
       <relation code="Album2MusicType" autocreate="true" generate="false" localized="false">
-          <sourceElement qualifier="album" type="Album" collectiontype="set" cardinality="one" ordered="false">
+          <deployment table="Album2MusicType" typecode="30200"/>
+          <sourceElement qualifier="album" type="Album" collectiontype="set" cardinality="many" ordered="false">
               <modifiers read="true" write="true" search="true" optional="true" />
           </sourceElement>
           <targetElement qualifier="types" type="MusicType" cardinality="many">
@@ -162,6 +163,24 @@
               <attribute qualifier="lirycs" type="java.lang.String">
                   <description>lyrics</description>
                   <persistence type="property"/>
+              </attribute>
+          </attributes>
+      </itemtype>
+
+      <itemtype generate="true" code="News" autocreate="true">
+          <deployment table="News" typecode="30270" />
+          <attributes>
+              <attribute qualifier="date" type="java.util.Date">
+                  <description>date of news item</description>
+                  <persistence type="property" />
+              </attribute>
+              <attribute qualifier="headline" type="java.lang.String">
+                  <description>short headline for the news item</description>
+                  <persistence type="property" />
+              </attribute>
+              <attribute qualifier="content" type="java.lang.String">
+                  <description>fuller description of the news item</description>
+                  <persistence type="property" />
               </attribute>
           </attributes>
       </itemtype>
