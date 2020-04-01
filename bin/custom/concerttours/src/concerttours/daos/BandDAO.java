@@ -21,4 +21,5 @@ public interface BandDAO
      * @return All bands with the given code.
      */
     List<BandModel> findBandsByCode(String code);
+    Integer getCountOfBands(Long periodHours);
 }

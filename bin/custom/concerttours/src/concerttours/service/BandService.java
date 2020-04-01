@@ -19,4 +19,5 @@ public interface BandService
      *            in case no band for the given code can be found
      */
     BandModel getBandForCode(String code);
+    Integer getCountOfBand(Long periodHours);
 }

@@ -36,6 +36,12 @@ public class DefaultBandService implements BandService
         }
         return result.get(0);
     }
+
+    @Override
+    public Integer getCountOfBand(Long periodHours) {
+        return bandDAO.getCountOfBands(periodHours);
+    }
+
     @Required
     public void setBandDAO(final BandDAO bandDAO)
     {

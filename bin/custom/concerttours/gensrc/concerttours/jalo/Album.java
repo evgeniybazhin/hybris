@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 23, 2020, 2:06:02 PM                    ---
+ * --- Generated at Mar 31, 2020, 5:26:45 PM                    ---
  * ----------------------------------------------------------------
  */
 package concerttours.jalo;
@@ -24,7 +24,6 @@ import de.hybris.platform.util.OneToManyHandler;
 import de.hybris.platform.util.Utilities;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +40,8 @@ public class Album extends GenericItem
 	public static final String TITLE = "title";
 	/** Qualifier of the <code>Album.realeaseYear</code> attribute **/
 	public static final String REALEASEYEAR = "realeaseYear";
-	/** Qualifier of the <code>Album.bands</code> attribute **/
-	public static final String BANDS = "bands";
+	/** Qualifier of the <code>Album.band</code> attribute **/
+	public static final String BAND = "band";
 	/** Qualifier of the <code>Album.types</code> attribute **/
 	public static final String TYPES = "types";
 	/** Relation ordering override parameter constants for Album2MusicType from ((concerttours))*/
@@ -53,12 +52,12 @@ public class Album extends GenericItem
 	/** Qualifier of the <code>Album.songs</code> attribute **/
 	public static final String SONGS = "songs";
 	/**
-	* {@link BidirectionalOneToManyHandler} for handling 1:n BANDS's relation attributes from 'one' side.
+	* {@link BidirectionalOneToManyHandler} for handling 1:n BAND's relation attributes from 'one' side.
 	**/
-	protected static final BidirectionalOneToManyHandler<Album> BANDSHANDLER = new BidirectionalOneToManyHandler<Album>(
+	protected static final BidirectionalOneToManyHandler<Album> BANDHANDLER = new BidirectionalOneToManyHandler<Album>(
 	ConcerttoursConstants.TC.ALBUM,
 	false,
-	"bands",
+	"band",
 	null,
 	false,
 	true,
@@ -69,7 +68,7 @@ public class Album extends GenericItem
 	**/
 	protected static final OneToManyHandler<Song> SONGSHANDLER = new OneToManyHandler<Song>(
 	ConcerttoursConstants.TC.SONG,
-	false,
+	true,
 	"album",
 	null,
 	false,
@@ -82,7 +81,7 @@ public class Album extends GenericItem
 		final Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
 		tmp.put(TITLE, AttributeMode.INITIAL);
 		tmp.put(REALEASEYEAR, AttributeMode.INITIAL);
-		tmp.put(BANDS, AttributeMode.INITIAL);
+		tmp.put(BAND, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -92,45 +91,45 @@ public class Album extends GenericItem
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Album.bands</code> attribute.
-	 * @return the bands
+	 * <i>Generated method</i> - Getter of the <code>Album.band</code> attribute.
+	 * @return the band
 	 */
-	public Band getBands(final SessionContext ctx)
+	public Band getBand(final SessionContext ctx)
 	{
-		return (Band)getProperty( ctx, "bands".intern());
+		return (Band)getProperty( ctx, "band".intern());
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Album.bands</code> attribute.
-	 * @return the bands
+	 * <i>Generated method</i> - Getter of the <code>Album.band</code> attribute.
+	 * @return the band
 	 */
-	public Band getBands()
+	public Band getBand()
 	{
-		return getBands( getSession().getSessionContext() );
+		return getBand( getSession().getSessionContext() );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>Album.bands</code> attribute. 
-	 * @param value the bands
+	 * <i>Generated method</i> - Setter of the <code>Album.band</code> attribute. 
+	 * @param value the band
 	 */
-	public void setBands(final SessionContext ctx, final Band value)
+	public void setBand(final SessionContext ctx, final Band value)
 	{
-		BANDSHANDLER.addValue( ctx, value, this  );
+		BANDHANDLER.addValue( ctx, value, this  );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>Album.bands</code> attribute. 
-	 * @param value the bands
+	 * <i>Generated method</i> - Setter of the <code>Album.band</code> attribute. 
+	 * @param value the band
 	 */
-	public void setBands(final Band value)
+	public void setBand(final Band value)
 	{
-		setBands( getSession().getSessionContext(), value );
+		setBand( getSession().getSessionContext(), value );
 	}
 	
 	@Override
 	protected Item createItem(final SessionContext ctx, final ComposedType type, final ItemAttributeMap allAttributes) throws JaloBusinessException
 	{
-		BANDSHANDLER.newInstance(ctx, allAttributes);
+		BANDHANDLER.newInstance(ctx, allAttributes);
 		return super.createItem( ctx, type, allAttributes );
 	}
 	
@@ -149,25 +148,44 @@ public class Album extends GenericItem
 	 * <i>Generated method</i> - Getter of the <code>Album.realeaseYear</code> attribute.
 	 * @return the realeaseYear - Date of realease
 	 */
-	public Date getRealeaseYear(final SessionContext ctx)
+	public Long getRealeaseYear(final SessionContext ctx)
 	{
-		return (Date)getProperty( ctx, "realeaseYear".intern());
+		return (Long)getProperty( ctx, "realeaseYear".intern());
 	}
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Album.realeaseYear</code> attribute.
 	 * @return the realeaseYear - Date of realease
 	 */
-	public Date getRealeaseYear()
+	public Long getRealeaseYear()
 	{
 		return getRealeaseYear( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Album.realeaseYear</code> attribute. 
+	 * @return the realeaseYear - Date of realease
+	 */
+	public long getRealeaseYearAsPrimitive(final SessionContext ctx)
+	{
+		Long value = getRealeaseYear( ctx );
+		return value != null ? value.longValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Album.realeaseYear</code> attribute. 
+	 * @return the realeaseYear - Date of realease
+	 */
+	public long getRealeaseYearAsPrimitive()
+	{
+		return getRealeaseYearAsPrimitive( getSession().getSessionContext() );
 	}
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Album.realeaseYear</code> attribute. 
 	 * @param value the realeaseYear - Date of realease
 	 */
-	public void setRealeaseYear(final SessionContext ctx, final Date value)
+	public void setRealeaseYear(final SessionContext ctx, final Long value)
 	{
 		setProperty(ctx, "realeaseYear".intern(),value);
 	}
@@ -176,7 +194,25 @@ public class Album extends GenericItem
 	 * <i>Generated method</i> - Setter of the <code>Album.realeaseYear</code> attribute. 
 	 * @param value the realeaseYear - Date of realease
 	 */
-	public void setRealeaseYear(final Date value)
+	public void setRealeaseYear(final Long value)
+	{
+		setRealeaseYear( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Album.realeaseYear</code> attribute. 
+	 * @param value the realeaseYear - Date of realease
+	 */
+	public void setRealeaseYear(final SessionContext ctx, final long value)
+	{
+		setRealeaseYear( ctx,Long.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Album.realeaseYear</code> attribute. 
+	 * @param value the realeaseYear - Date of realease
+	 */
+	public void setRealeaseYear(final long value)
 	{
 		setRealeaseYear( getSession().getSessionContext(), value );
 	}

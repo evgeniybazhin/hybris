@@ -26,6 +26,7 @@ public class DefaultTourFacade implements TourFacade
         {
             return null;
         }
+
         // Create a list of ConcertSummaryData from the matches
         final List<ConcertSummaryData> concerts = new ArrayList<>();
         if (product.getVariants() != null)
@@ -45,6 +46,7 @@ public class DefaultTourFacade implements TourFacade
                 }
             }
         }
+
         // Now we can create the TourData transfer object
         final TourData tourData = new TourData();
         tourData.setId(product.getCode());

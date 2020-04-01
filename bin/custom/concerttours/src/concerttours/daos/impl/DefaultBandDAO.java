@@ -1,7 +1,16 @@
 package concerttours.daos.impl;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+
+import java.sql.Timestamp;
+import java.time.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.time.TimeService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import concerttours.daos.BandDAO;
@@ -15,6 +24,9 @@ public class DefaultBandDAO implements BandDAO
      */
     @Autowired
     private FlexibleSearchService flexibleSearchService;
+
+    @Autowired
+    private TimeService timeService;
     /**
      * Finds all Bands by performing a FlexibleSearch using the {@link FlexibleSearchService}.
      */
@@ -48,5 +60,21 @@ public class DefaultBandDAO implements BandDAO
         final FlexibleSearchQuery query = new FlexibleSearchQuery(queryString);
         query.addQueryParameter("code", code);
         return flexibleSearchService.<BandModel> search(query).getResult();
+    }
+
+    @Override
+    public Integer getCountOfBands(Long periodHours) {
+        final FlexibleSearchQuery flexibleSearchQuery = new FlexibleSearchQuery("SELECT * FROM {Band AS b} WHERE {b:creationTime} > ?date");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, Integer.parseInt("-" + periodHours));
+        Date yesterdayDate = cal.getTime();
+        flexibleSearchQuery.addQueryParameter("date", yesterdayDate);
+//        String queryString = "SELECT * FROM {Band as b} WHERE {b.creationTime} > " + timestamp;
+        SearchResult<BandModel> result = flexibleSearchService.search(flexibleSearchQuery);
+        if(result != null){
+            return result.getCount();
+        }else{
+            return 0;
+        }
     }
 }

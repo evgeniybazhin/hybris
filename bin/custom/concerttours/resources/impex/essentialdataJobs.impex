@@ -1,0 +1,7 @@
+# Define the cron job and the job that it wraps
+INSERT_UPDATE PeriodAwareCronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode);periodHours
+                     ;reportCronJob;reportJob;false;en;1
+
+# Define the trigger that periodically invokes the cron job
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+                     ;reportCronJob;  0/10 * * * * ?

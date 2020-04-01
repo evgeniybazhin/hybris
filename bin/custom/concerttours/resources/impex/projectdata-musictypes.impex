@@ -1,9 +1,26 @@
 # ImpEx for Importing Bands music type assignments
 INSERT_UPDATE Band;code[unique=true];types(code)
-;A001;rock,eighties
-;A006;rock,sixties,seventies,eighties,maleVocals
-;A003;jazz,femaleVocals
-;A004;nineties,maleVocals,pop
-;A002;choral,pop
-;A005;gospel
-;A007;choral,classical
+                  ;A001;rock,eighties
+                  ;A006;rock,sixties,seventies,eighties,maleVocals
+                  ;A003;jazz,femaleVocals
+                  ;A004;nineties,maleVocals,pop
+                  ;A002;choral,pop
+                  ;A005;gospel
+                  ;A007;choral,classical
+
+INSERT_UPDATE Song;title[unique=true];album(title);band(name)
+                  ;Samba White Moth;Everything was so;yRock
+                  ;Granddaughter of a forester;Everything was so;yRock
+                  ;black cat;Samba White Moth;yBand
+                  ;Mother;Samba White Moth;yBand
+                  ;And it could have been otherwise;The present;Banned
+                  ;You said;The present;Banned
+
+INSERT_UPDATE Album;title[unique=true];band(name);types(code)
+                   ;Everything was so;yRock;rock,eighties
+                   ;Samba White Moth;yBand;jazz,femaleVocals,rock
+                   ;The present;Banned;choral,pop
+                   ;The Future;yRock;
+
+#INSERT_UPDATE PeriodAwareCronJob; code[unique=true];periodHours
+#                                ;reportCronJob;1

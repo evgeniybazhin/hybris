@@ -16,7 +16,7 @@ public class NewBandEventListener extends AbstractEventListener<AfterItemCreatio
         return modelService;
     }
     public void setModelService(final ModelService modelService)
-        {
+    {
         this.modelService = modelService;
     }
     @Override
